@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: revenue_summary
+    description: "Aggregated revenue metrics by date, state, and category"
+  
+  - name: customer_rfm
+    description: "RFM (Recency, Frequency, Monetary) segmentation for customers"
+  
+  - name: delivery_performance
+    description: "Delivery times and on-time rates by state and category"

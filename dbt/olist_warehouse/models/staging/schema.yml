@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+  - name: staging
+    schema: staging
+    tables:
+      - name: orders
+      - name: customers
+      - name: products
+      - name: sellers
+      - name: order_items
+      - name: order_payments
+      - name: order_reviews
+      - name: geolocation
+      - name: product_category_translation
+
+models:
+  - name: stg_orders
+    description: "Cleaned orders data"
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
