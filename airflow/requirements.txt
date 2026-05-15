@@ -1,0 +1,7 @@
+# ── Airflow extra Python dependencies ──────────────────────
+pandas==2.2.2
+numpy==1.26.4
+psycopg2-binary==2.9.9
+SQLAlchemy==2.0.30
+dbt-core==1.7.10
+dbt-postgres==1.7.10
