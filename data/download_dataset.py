@@ -144,9 +144,9 @@ def verify_files():
         fpath = RAW_DATA_DIR / fname
         if fpath.exists():
             size_mb = fpath.stat().st_size / (1024 * 1024)
-            print(f"   ✓ {fname:<55} {size_mb:>7.2f} MB")
+            print(f"   [OK] {fname:<55} {size_mb:>7.2f} MB")
         else:
-            print(f"   ✗ MISSING: {fname}")
+            print(f"   [MISSING] {fname}")
             all_ok = False
 
     if all_ok:
