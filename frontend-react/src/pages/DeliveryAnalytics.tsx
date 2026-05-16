@@ -14,7 +14,7 @@ export default function DeliveryAnalytics() {
 
   const params = Object.fromEntries(Object.entries(filters).filter(([, v]) => v !== ''))
 
-  const { data: avg,    loading: al } = useApi(fetchAvgDelivery,     params, [tick])
+  const { data: avg } = useApi(fetchAvgDelivery,     params, [tick])
   const { data: states, loading: sl } = useApi(fetchDeliveryByState, {},     [tick])
 
   const stateData = (states ?? []).slice(0, 27).map(s => ({
