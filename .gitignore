@@ -35,8 +35,8 @@ dbt/olist_warehouse/dbt_packages/
 dbt/olist_warehouse/logs/
 
 # === Airflow ===
-airflow/logs/**
-!airflow/logs/.gitkeep
+airflow_workspace/logs/**
+!airflow_workspace/logs/.gitkeep
 
 # === Data Files (large CSVs) ===
 data/raw/*.csv

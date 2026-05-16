@@ -1,6 +1,6 @@
 """
 ================================================================
-FILE: airflow/dags/olist_etl_dag.py
+FILE: airflow_workspace/dags/olist_etl_dag.py
 PURPOSE: Main Airflow DAG for extracting, cleaning, and loading
          Olist e-commerce dataset into PostgreSQL staging schema.
 ================================================================
@@ -171,13 +171,13 @@ with DAG(
     # Note: dbt project is mounted at /opt/airflow/dbt/olist_warehouse
     run_dbt_task = BashOperator(
         task_id='run_dbt_models',
-        bash_command='cd /opt/airflow/dbt/olist_warehouse && dbt run --profiles-dir .',
+        bash_command='cd /opt/airflow/dbt/olist_warehouse && dbt deps && dbt run --profiles-dir .',
     )
     
     # 5. Run dbt tests
     test_dbt_task = BashOperator(
         task_id='run_dbt_tests',
-        bash_command='cd /opt/airflow/dbt/olist_warehouse && dbt test --profiles-dir .',
+        bash_command='cd /opt/airflow/dbt/olist_warehouse && dbt deps && dbt test --profiles-dir .',
     )
 
     # Define DAG dependencies

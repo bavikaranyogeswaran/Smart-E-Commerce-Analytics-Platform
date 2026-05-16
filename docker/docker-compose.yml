@@ -1,3 +1,5 @@
+name: olist-analytics
+
 services:
 
   # ─────────────────────────────────────────────
@@ -38,9 +40,9 @@ services:
       _AIRFLOW_DB_MIGRATE: "true"
       _AIRFLOW_WWW_USER_CREATE: "true"
     volumes:
-      - ../airflow/dags:/opt/airflow/dags
-      - ../airflow/logs:/opt/airflow/logs
-      - ../airflow/plugins:/opt/airflow/plugins
+      - ../airflow_workspace/dags:/opt/airflow/dags
+      - ../airflow_workspace/logs:/opt/airflow/logs
+      - ../airflow_workspace/plugins:/opt/airflow/plugins
       - ../data:/opt/airflow/data
       - ../dbt:/opt/airflow/dbt
     entrypoint: /bin/bash
@@ -63,9 +65,9 @@ services:
     env_file:
       - ../.env
     volumes:
-      - ../airflow/dags:/opt/airflow/dags
-      - ../airflow/logs:/opt/airflow/logs
-      - ../airflow/plugins:/opt/airflow/plugins
+      - ../airflow_workspace/dags:/opt/airflow/dags
+      - ../airflow_workspace/logs:/opt/airflow/logs
+      - ../airflow_workspace/plugins:/opt/airflow/plugins
       - ../data:/opt/airflow/data
       - ../dbt:/opt/airflow/dbt
     command: scheduler
@@ -89,9 +91,9 @@ services:
     env_file:
       - ../.env
     volumes:
-      - ../airflow/dags:/opt/airflow/dags
-      - ../airflow/logs:/opt/airflow/logs
-      - ../airflow/plugins:/opt/airflow/plugins
+      - ../airflow_workspace/dags:/opt/airflow/dags
+      - ../airflow_workspace/logs:/opt/airflow/logs
+      - ../airflow_workspace/plugins:/opt/airflow/plugins
       - ../data:/opt/airflow/data
       - ../dbt:/opt/airflow/dbt
     ports:
@@ -127,7 +129,7 @@ services:
     networks:
       - olist_network
     healthcheck:
-      test: ["CMD", "curl", "--fail", "http://localhost:8000/"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/')"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -150,7 +152,7 @@ services:
     networks:
       - olist_network
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/"]
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1:3000/"]
       interval: 30s
       timeout: 10s
       retries: 3

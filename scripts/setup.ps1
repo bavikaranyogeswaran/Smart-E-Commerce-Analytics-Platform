@@ -26,8 +26,8 @@ if (-Not (Test-Path ".env")) {
 }
 
 # ── Step 2: Create airflow logs placeholder ──────────────────
-Write-Host "[2/5] Ensuring airflow/logs directory exists..." -ForegroundColor Yellow
-New-Item -ItemType File -Path "airflow/logs/.gitkeep" -Force | Out-Null
+Write-Host "[2/5] Ensuring airflow_workspace/logs directory exists..." -ForegroundColor Yellow
+New-Item -ItemType File -Path "airflow_workspace/logs/.gitkeep" -Force | Out-Null
 Write-Host "      Done." -ForegroundColor Green
 
 # ── Step 3: Check Docker is running ──────────────────────────
