@@ -1,7 +1,9 @@
 # ── Airflow extra Python dependencies ──────────────────────
+# NOTE: Do NOT pin SQLAlchemy here. Airflow 2.8.1 requires SQLAlchemy <2.0
+# (see Airflow constraints for v2.8.1). Pinning 2.x here breaks the psycopg2
+# dialect at startup with: ArgumentError: Invalid value for 'executemany_mode'.
 pandas==2.2.2
 numpy==1.26.4
 psycopg2-binary==2.9.9
-SQLAlchemy==2.0.30
 dbt-core==1.7.10
 dbt-postgres==1.7.10

@@ -29,7 +29,9 @@ services:
   # Airflow — DB Initialization (runs once)
   # ─────────────────────────────────────────────
   airflow-init:
-    image: apache/airflow:2.8.1-python3.11
+    build:
+      context: ../airflow_workspace
+      dockerfile: Dockerfile
     container_name: olist_airflow_init
     depends_on:
       postgres:
@@ -54,7 +56,9 @@ services:
   # Airflow — Scheduler
   # ─────────────────────────────────────────────
   airflow-scheduler:
-    image: apache/airflow:2.8.1-python3.11
+    build:
+      context: ../airflow_workspace
+      dockerfile: Dockerfile
     container_name: olist_airflow_scheduler
     restart: unless-stopped
     depends_on:
@@ -80,7 +84,9 @@ services:
   # Airflow — Web Server (UI at :8080)
   # ─────────────────────────────────────────────
   airflow-webserver:
-    image: apache/airflow:2.8.1-python3.11
+    build:
+      context: ../airflow_workspace
+      dockerfile: Dockerfile
     container_name: olist_airflow_webserver
     restart: unless-stopped
     depends_on:
