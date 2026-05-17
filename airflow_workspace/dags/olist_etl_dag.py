@@ -106,23 +106,21 @@ def extract_clean_load(**kwargs):
                 # Ensure comments are strings and handle NaNs
                 df[col] = df[col].astype(str).replace('nan', np.nan)
         
-        # Load to PostgreSQL (replace staging data completely on each run)
+        # Load to PostgreSQL (replace staging data completely on each run).
+        # TRUNCATE + INSERT in a single transaction for idempotency.
         print(f"  Loading into staging.{table_name}...")
         try:
-            # We use if_exists='append' to keep the schema definition from our init scripts,
-            # but we first TRUNCATE the table to ensure idempotency.
             with engine.begin() as conn:
                 conn.exec_driver_sql(f"TRUNCATE TABLE staging.{table_name} CASCADE;")
-                
-            df.to_sql(
-                name=table_name,
-                schema='staging',
-                con=engine,
-                if_exists='append',
-                index=False,
-                method='multi',
-                chunksize=10000
-            )
+                df.to_sql(
+                    name=table_name,
+                    schema='staging',
+                    con=conn,
+                    if_exists='append',
+                    index=False,
+                    method='multi',
+                    chunksize=10000,
+                )
             print("  Done.")
         except Exception as e:
             print(f"  [ERROR] Failed to load {table_name}: {e}")

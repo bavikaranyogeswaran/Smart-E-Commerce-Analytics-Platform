@@ -1,8 +1,12 @@
 # ── Airflow extra Python dependencies ──────────────────────
-# NOTE: Do NOT pin SQLAlchemy here. Airflow 2.8.1 requires SQLAlchemy <2.0
-# (see Airflow constraints for v2.8.1). Pinning 2.x here breaks the psycopg2
-# dialect at startup with: ArgumentError: Invalid value for 'executemany_mode'.
-pandas==2.2.2
+# Version constraints (do not bump without re-validating compatibility):
+#   - Airflow 2.8.1 pins SQLAlchemy <2.0. Pandas 2.x's to_sql() requires
+#     SQLAlchemy >= 2.0 to recognize Engine/Connection objects; under 1.4 it
+#     falls through to a DBAPI path and calls .cursor() on the connection,
+#     crashing the ETL. pandas 1.5.3 is the last version compatible with
+#     SQLAlchemy 1.4 — Airflow 2.8.1 itself ships with this pandas range.
+#   - Do NOT pin SQLAlchemy here; let Airflow's constraints pick the right 1.4.x.
+pandas==1.5.3
 numpy==1.26.4
 psycopg2-binary==2.9.9
 dbt-core==1.7.10
