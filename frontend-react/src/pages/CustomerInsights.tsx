@@ -31,7 +31,7 @@ export default function CustomerInsights() {
   const highValue = (rfm ?? []).find(r => r.rfm_segment === 'High Value')
 
   return (
-    <div>
+    <>
       <Header title="Customer Insights" subtitle="RFM segmentation, top spenders, and geographic distribution" onRefresh={() => setTick(t => t + 1)} />
       <div className="page-body">
         <Filters filters={filters} onChange={setFilters} />
@@ -87,6 +87,6 @@ export default function CustomerInsights() {
           )}
         </div>
       </div>
-    </div>
+    </>
   )
 }

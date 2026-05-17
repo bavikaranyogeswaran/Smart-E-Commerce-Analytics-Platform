@@ -30,7 +30,7 @@ export default function ProductPerformance() {
   const topProduct = (products ?? [])[0]
 
   return (
-    <div>
+    <>
       <Header title="Product Performance" subtitle="Top products, category rankings, and review scores" onRefresh={() => setTick(t => t + 1)} />
       <div className="page-body">
         <Filters filters={filters} onChange={setFilters} />
@@ -84,6 +84,6 @@ export default function ProductPerformance() {
           )}
         </div>
       </div>
-    </div>
+    </>
   )
 }

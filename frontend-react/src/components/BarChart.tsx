@@ -48,10 +48,16 @@ export function BarChart({
 }: BarChartProps) {
   if (!data.length) return <div className="empty-state">No data available</div>
   const isVertical = layout === 'vertical'
+  // Recharts' `layout` prop is the inverse of what our prop name suggests:
+  //   our `vertical` (bars rise vertically) → Recharts `horizontal`
+  //   our `horizontal` (bars extend sideways) → Recharts `vertical`
+  // Without this mapping, axis types don't match the chart layout and numeric
+  // domain collapses to [0, 1], so bars never render.
+  const rechartsLayout = isVertical ? 'horizontal' : 'vertical'
 
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <RechartsBar data={data} layout={layout} margin={{ top: 4, right: 20, left: 0, bottom: 0 }}>
+      <RechartsBar data={data} layout={rechartsLayout} margin={{ top: 4, right: 20, left: 0, bottom: 0 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)"
           horizontal={!isVertical} vertical={isVertical} />
         {isVertical ? (

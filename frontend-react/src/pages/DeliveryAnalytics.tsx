@@ -25,7 +25,7 @@ export default function DeliveryAnalytics() {
   }))
 
   return (
-    <div>
+    <>
       <Header title="Delivery Analytics" subtitle="Average delivery times, on-time rates, and state-level performance" onRefresh={() => setTick(t => t + 1)} />
       <div className="page-body">
         <Filters filters={filters} onChange={setFilters} />
@@ -83,6 +83,6 @@ export default function DeliveryAnalytics() {
           )}
         </div>
       </div>
-    </div>
+    </>
   )
 }

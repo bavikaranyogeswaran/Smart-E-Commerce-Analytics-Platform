@@ -37,7 +37,7 @@ export default function SalesAnalytics() {
   }))
 
   return (
-    <div>
+    <>
       <Header title="Sales Analytics" subtitle="Revenue trends, category performance, and order analysis" onRefresh={() => setTick(t => t + 1)} />
       <div className="page-body">
         <Filters filters={filters} onChange={setFilters} />
@@ -67,6 +67,6 @@ export default function SalesAnalytics() {
           )}
         </div>
       </div>
-    </div>
+    </>
   )
 }

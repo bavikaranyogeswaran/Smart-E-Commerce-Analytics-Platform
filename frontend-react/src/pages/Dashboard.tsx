@@ -46,7 +46,7 @@ export default function Dashboard() {
   }))
 
   return (
-    <div>
+    <>
       <Header
         title="Dashboard Overview"
         subtitle="Key metrics across your entire e-commerce operation"
@@ -92,6 +92,6 @@ export default function Dashboard() {
           <BarChart data={prodData} bars={[{ key: 'revenue', name: 'Revenue (R$)', color: '#06b6d4' }]} xKey="name" layout="horizontal" formatter={fmtK} colorize height={240} />
         </div>
       </div>
-    </div>
+    </>
   )
 }
